@@ -1,0 +1,10 @@
+{
+    "design_path": "./out/EGFR",
+    "binder_name": "EGFR",
+    "starting_pdb": "./example/martin.pacesa-EGFR_l138_s90285_mpnn2.pdb",
+    "binder_chain": "A",
+    "chains": "B",
+    "target_hotspot_residues": "B11-13,B15-18,B356,B440-441",
+    "lengths": [100, 150],
+    "number_of_final_designs": 100
+}
