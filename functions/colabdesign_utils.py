@@ -70,6 +70,12 @@ def binder_hallucination(
                                     "con":advanced_settings["weights_con_intra"],
                                     "i_con":advanced_settings["weights_con_inter"],
                                     })
+    
+    if binder_chain is not None:
+        af_model.opt["weights"].update({
+        "dgram_cce": 1e-1,
+    })
+
 
     # redefine intramolecular contacts (con) and intermolecular contacts (i_con) definitions
     af_model.opt["con"].update({"num":advanced_settings["intra_contact_number"],"cutoff":advanced_settings["intra_contact_distance"],"binary":False,"seqsep":9})
@@ -133,11 +139,6 @@ def binder_hallucination(
 
         # determine pLDDT of best iteration according to lowest 'loss' value
         initial_plddt = get_best_plddt(af_model, length)
-
-        if binder_chain is not None:
-            af_model.opt["weights"].update({
-                "dgram_cce": 1e-1,
-            })
         
         # if best iteration has high enough confidence then continue
         if initial_plddt > 0.65:
