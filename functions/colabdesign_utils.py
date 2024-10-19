@@ -121,10 +121,23 @@ def binder_hallucination(
     elif advanced_settings["design_algorithm"] == '4stage':
         # initial logits to prescreen trajectory
         print("Stage 1: Test Logits")
-        af_model.design_logits(iters=50, e_soft=0.9, models=design_models, num_models=1, sample_models=advanced_settings["sample_models"], save_best=True)
+
+        af_model.design_logits(
+            iters=50,
+            e_soft=0.9,
+            models=design_models,
+            num_models=1,
+            sample_models=advanced_settings["sample_models"],
+            save_best=True
+        )
 
         # determine pLDDT of best iteration according to lowest 'loss' value
         initial_plddt = get_best_plddt(af_model, length)
+
+        if binder_chain is not None:
+            af_model.opt["weights"].update({
+                "dgram_cce": 1e-1,
+            })
         
         # if best iteration has high enough confidence then continue
         if initial_plddt > 0.65:
@@ -144,6 +157,12 @@ def binder_hallucination(
 
             # how many logit iterations left
             logits_iter = advanced_settings["soft_iterations"] - 50
+
+            if binder_chain is not None:
+                af_model.opt["weights"].update({
+                    "dgram_cce": 0.,
+                })
+
             if logits_iter > 0:
                 print("Stage 1: Additional Logits Optimisation")
                 af_model.clear_best()
