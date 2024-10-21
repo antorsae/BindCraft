@@ -1,5 +1,5 @@
 {
-    "design_path": "./out/EGFR-v2",
+    "design_path": "./out/EGFR-v3",
     "binder_name": "EGFR",
     "starting_pdb": "./example/6aru.pdb",
     "chains": "A",
