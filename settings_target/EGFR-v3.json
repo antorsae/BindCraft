@@ -1,0 +1,9 @@
+{
+    "design_path": "./out/EGFR-v2",
+    "binder_name": "EGFR",
+    "starting_pdb": "./example/6aru.pdb",
+    "chains": "A",
+    "target_hotspot_residues" : "11-13,15-18,356",
+    "lengths": [100, 150],
+    "number_of_final_designs": 100
+}
