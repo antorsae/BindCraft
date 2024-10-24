@@ -1,0 +1,10 @@
+{
+    "design_path": "./out/EGFR",
+    "binder_name": "EGFR",
+    "starting_pdb": "./example/EGFR-ahmedsameh-Q3.pdb",
+    "binder_chain": "A",
+    "chains": "B",
+    "target_hotspot_residues": "B290",
+    "lengths": [100, 150],
+    "number_of_final_designs": 100
+}

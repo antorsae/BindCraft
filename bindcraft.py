@@ -174,7 +174,6 @@ while True:
             
             if advanced_settings["enable_mpnn"]:
                 # initialise MPNN counters
-                mpnn_n = 1
                 accepted_mpnn = 0
                 mpnn_dict = {}
                 design_start_time = time.time()
@@ -214,7 +213,7 @@ while True:
                 binder_prediction_model.prep_inputs(length=length)
 
                 # iterate over designed sequences        
-                for mpnn_sequence in mpnn_sequences:
+                for mpnn_n, mpnn_sequence in enumerate(mpnn_sequences,1):
                     mpnn_time = time.time()
 
                     # compile sequences dictionary with scores and remove duplicate sequences
@@ -420,9 +419,6 @@ while True:
                             failure_df.to_csv(failure_csv, index=False)
                             shutil.copy(best_model_pdb, design_paths["Rejected"])
                         
-                        # increase MPNN design number
-                        mpnn_n += 1
-
                         # if enough mpnn sequences of the same trajectory pass filters then stop
                         if accepted_mpnn >= advanced_settings["max_mpnn_sequences"]:
                             break
